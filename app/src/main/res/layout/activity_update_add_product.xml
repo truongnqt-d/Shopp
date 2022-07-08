@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateAddProductActivity">
+
+    <ImageView
+        android:id="@+id/back_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_baseline_chevron_left"/>
+
+    <View
+        android:id="@+id/horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="1.8dp"
+        android:layout_below="@+id/back_click"
+        android:layout_marginTop="15dp"
+        android:background="@color/black_AB0" />
+
+    <ImageView
+        android:id="@+id/image_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horizontal_line"
+        android:layout_margin="15dp"
+        android:background="@color/gray_D1D1D1"
+        android:padding="80dp"
+        android:src="@drawable/ic_baseline_add_black" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/update_add"
+        android:layout_below="@+id/image_add"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/name"
+            android:textColor="#CDCBCB"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/production_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:background="@drawable/border"
+            android:hint="@string/production_name"></EditText>
+
+        <View
+            android:id="@+id/horizontal_line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/production_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/gray_D1D1D1" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_below="@+id/horizontal_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/description"
+            android:textColor="#CDCBCB"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/production_description"
+            android:layout_below="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:hint="@string/production_description"></EditText>
+
+        <View
+            android:id="@+id/horizontal_line2"
+            android:layout_below="@+id/production_description"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_D1D1D1" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_below="@+id/horizontal_line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/price"
+            android:textColor="#CDCBCB"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/production_price"
+            android:layout_below="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:hint="@string/production_price"></EditText>
+
+        <View
+            android:id="@+id/horizontal_line3"
+            android:layout_below="@+id/production_price"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray_D1D1D1" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/update_add"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#414BB2"
+        android:text="@string/update_add"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+</RelativeLayout>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MerchantInfoActivity">
+
+    <RelativeLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        style="@style/margin"
+        android:id="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+        <TextView
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/my_profile"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:padding="@dimen/_15sdp"
+            android:id="@+id/cart"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cart_24"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/person"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="@color/grays"
+        android:padding="@dimen/_15sdp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_baseline_child_care_24" />
+
+    <ImageView
+        android:padding="@dimen/_15sdp"
+        android:id="@+id/upload_information"
+        android:src="@drawable/ic_baseline_drive_file_rename_outline_24"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_container"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_20sdp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_container"
+        app:layout_constraintLeft_toRightOf="@+id/person"
+        app:layout_constraintRight_toLeftOf="@+id/upload_information"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/name"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="@string/app_name"
+            android:textSize="@dimen/_25ssp"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/_17ssp"
+            android:textColor="@color/gray_B5"
+            android:textStyle="bold"
+            android:text="Member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/my_credit_cart"
+        app:layout_constraintTop_toBottomOf="@+id/person"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/gray"
+        android:textStyle="bold"
+        android:text="@string/my_credit_card"/>
+
+    <HorizontalScrollView
+        android:id="@+id/layout_scv_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_credit_cart">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/layout_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/radius_8dp"
+                android:backgroundTint="@color/black_AB0"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_12sdp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_credit_card_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="@string/credit"
+                    android:textColor="@color/White"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_17ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_add_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/radius_8dp"
+                android:backgroundTint="@color/teal_AE1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_12sdp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_card_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="@string/add_credit_card"
+                    android:textColor="@color/White"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_17ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_delete_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/radius_8dp"
+                android:backgroundTint="@color/orange_BEE"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_12sdp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_delete_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="@string/delete_cart"
+                    android:textColor="@color/White"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_17ssp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/information"
+        app:layout_constraintTop_toBottomOf="@+id/layout_scv_credit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/gray"
+        android:textStyle="bold"
+        android:text="@string/information" />
+
+    <RelativeLayout
+        android:id="@+id/layout_my_product"
+        app:layout_constraintTop_toBottomOf="@+id/information"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/img_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_background"
+            android:backgroundTint="@color/teal_59B"
+            android:padding="@dimen/_15sdp"
+            android:src="@drawable/ic_baseline_shopping_cart_checkout_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_toRightOf="@+id/img_product"
+            android:text="@string/my_product"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_17ssp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:src="@drawable/ic_forward_ios_24" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layout_liked"
+        app:layout_constraintTop_toBottomOf="@+id/layout_my_product"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/img_liked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_background"
+            android:backgroundTint="@color/yellow_FFD"
+            android:padding="@dimen/_15sdp"
+            android:src="@drawable/favorite" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_toRightOf="@+id/img_liked"
+            android:text="@string/liked"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_17ssp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:src="@drawable/ic_forward_ios_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_assess"
+        app:layout_constraintTop_toBottomOf="@+id/layout_liked"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <ImageView
+            android:id="@+id/assess"
+            android:padding="@dimen/_15sdp"
+            android:background="@drawable/circle_background"
+            android:backgroundTint="@color/white_D8"
+            android:src="@drawable/ic_baseline_grade_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_toRightOf="@+id/assess"
+            android:text="@string/my_review"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_17ssp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:src="@drawable/ic_forward_ios_24" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/my_account"
+        app:layout_constraintTop_toBottomOf="@+id/layout_assess"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/gray"
+        android:textStyle="bold"
+        android:text="@string/my_account" />
+
+    <TextView
+        android:id="@+id/switch_to_other_account"
+        app:layout_constraintTop_toBottomOf="@+id/my_account"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_17ssp"
+        android:textColor="@color/green_39"
+        android:textStyle="bold"
+        android:text="@string/switch_to_other_account" />
+
+    <TextView
+        android:id="@+id/log_out"
+        app:layout_constraintTop_toBottomOf="@+id/switch_to_other_account"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_17ssp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:text="@string/log_out" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

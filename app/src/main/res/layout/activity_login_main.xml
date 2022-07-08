@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    tools:context=".MainActivityLogin">
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:id="@+id/ok"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/welcome_to_app"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/email"
+            android:textColor="#CDCBCB"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border"
+            android:inputType="textEmailAddress"
+            android:maxLength="50"
+            android:hint="@string/you_email"></EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/password"
+            android:textColor="#CDCBCB"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/border"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:hint="@string/you_password"></EditText>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#414BB2"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textSize="20sp"></Button>
+
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="#808080"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textSize="20sp"></Button>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/forgot_password"
+            android:textColor="#3F53D9"
+            android:textSize="22sp"></TextView>
+
+    </LinearLayout>
+
+</ScrollView>

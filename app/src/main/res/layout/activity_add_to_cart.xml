@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_8sdp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
+    tools:context=".AddToCartActivity">
+    <ScrollView
+        android:id="@+id/layout_product_info"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/images"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBaseline_toTopOf="parent"
+                app:layout_constraintDimensionRatio="H, 2:2"
+                app:riv_corner_radius="@dimen/_8sdp"
+                tools:layout_editor_absoluteX="-75dp"
+                tools:layout_editor_absoluteY="-2dp"
+                android:src="@drawable/quanao" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="Quần áo nữ"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_25ssp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/images"
+                tools:layout_editor_absoluteX="15dp" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_15sdp"
+                android:text="đ78.000"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:layout_editor_absoluteX="15dp" />
+
+            <LinearLayout
+                android:id="@+id/layout_evaluate"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/price"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/evaluate"
+                    android:textSize="@dimen/_25ssp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3.5"/>
+                <TextView
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_5"/>
+            </LinearLayout>
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:progressTint="@color/yellows"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:isIndicator="true"
+                android:numStars="5"
+                app:layout_constraintLeft_toRightOf="@+id/layout_evaluate"
+                app:layout_constraintTop_toBottomOf="@id/price"
+                android:rating="3"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_favorite_border_24"
+                android:layout_marginTop="@dimen/_30sdp"
+                app:layout_constraintTop_toBottomOf="@id/price"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/product_info"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/layout_evaluate"
+                android:text="Product info"/>
+
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@id/product_info"
+                android:text="Điện thoại màu xanh, camera 4 mắt giá rẻ không bán lẻ"/>
+
+            <TextView
+                android:id="@+id/line1"
+                android:layout_margin="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/description"/>
+
+            <RelativeLayout
+                android:id="@+id/layout_product_details"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp" >
+                <ImageView
+                    android:id="@+id/img_product_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_product_details" />
+
+                <TextView
+                    android:id="@+id/txt_product_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/img_product_details"
+                    android:text="@string/product_details" />
+
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_forward_ios_24" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/line2"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/layout_product_details"/>
+
+            <RelativeLayout
+                android:id="@+id/layout_shipping"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp" >
+                <ImageView
+                    android:id="@+id/img_shipping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_shipping_24" />
+
+                <TextView
+                    android:id="@+id/txt_shipping"
+                    android:layout_toRightOf="@+id/img_shipping"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/shipping_information" />
+
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_forward_ios_24" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/line3"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/layout_shipping"/>
+
+            <RelativeLayout
+                android:id="@+id/layout_return"
+                android:gravity="center_vertical"
+                android:layout_margin="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp" >
+                <ImageView
+                    android:id="@+id/img_return"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_product_details" />
+
+                <TextView
+                    android:layout_toRightOf="@+id/img_return"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/returns" />
+
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_forward_ios_24" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/line4"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/layout_return"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:background="@drawable/bgr_layout_item_add_to_cart"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+            <ImageView
+                android:id="@+id/chat"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_chat_24"/>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chat_ngay"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@color/black"/>
+        <LinearLayout
+            android:id="@+id/add_to_cart"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" >
+            <ImageView
+                android:id="@+id/cart"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_cart_24"/>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10ssp"
+                android:text="@string/them_vao_gio_hang"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/buy"
+            android:background="@color/orange_BEE"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/mua_ngay"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

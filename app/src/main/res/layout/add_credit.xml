@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/baseline_chevron_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_baseline_chevron_left"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@+id/baseline_chevron_left"
+            android:text="Thêm Thẻ"
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/titles"
+        android:background="@color/teal_59"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@+id/baseline_chevron_left"
+            android:text="Thông tin thẻ của bạn được bảo mật"
+            android:textSize="17sp"
+            android:textColor="@color/teal_70"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="Thông tin thẻ của bạn sẽ được bảo mật an toàn tuyệt đối, Shopp sẽ không được cấp quyền truy cập vào thông tin thẻ của bạn"
+            android:textColor="@color/black"
+            android:textSize="17sp">
+
+        </TextView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/chitiet"
+        app:layout_constraintTop_toBottomOf="@+id/titles"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chi tiết thẻ"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="20dp"/>
+
+    <EditText
+        app:layout_constraintTop_toBottomOf="@+id/chitiet"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/edt_sothe"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:lines="1"
+        android:maxLength="11"
+        android:hint="Số thẻ"/>
+
+    <EditText
+        app:layout_constraintTop_toBottomOf="@+id/edt_sothe"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/edt_date"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginRight="170dp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:lines="1"
+        android:maxLength="11"
+        android:hint="Ngày hết hạn"/>
+
+    <EditText
+        app:layout_constraintTop_toBottomOf="@+id/edt_sothe"
+        app:layout_constraintLeft_toRightOf="@+id/edt_date"
+        android:id="@+id/edt_maxacthu"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="270dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:lines="1"
+        android:maxLength="11"
+        android:hint="Mã xác thực"/>
+
+    <EditText
+        app:layout_constraintTop_toBottomOf="@+id/edt_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/edt_name"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:lines="1"
+        android:maxLength="11"
+        android:hint="Họ và tên chủ thẻ"/>
+
+    <TextView
+        android:id="@+id/line"
+        android:background="@color/gray"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:id="@+id/address"
+        app:layout_constraintTop_toBottomOf="@+id/line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Địa chỉ đăng ký thẻ"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="20dp"/>
+
+
+    <EditText
+        app:layout_constraintTop_toBottomOf="@+id/address"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/edt_address"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:lines="1"
+        android:maxLength="11"
+        android:hint="Địa chỉ"/>
+
+    <EditText
+        app:layout_constraintTop_toBottomOf="@+id/edt_address"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/edt_mabuuchinh"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:lines="1"
+        android:maxLength="11"
+        android:hint="Mã bưu chính"/>
+
+    <TextView
+        android:id="@+id/line1"
+        android:background="@color/gray"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_mabuuchinh"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@+id/line1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/done"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#414BB2"
+        android:text="Hoàn thành"
+        android:textAllCaps="false"
+        android:textSize="20sp"></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/sign_up"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textColor="#CDCBCB"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:hint="@string/you_email" />
+
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="#CDCBCB"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:hint="@string/you_password"></EditText>
+
+        <RelativeLayout
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/merchant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/merchant"
+                android:textColor="#251818"
+                android:textSize="20sp"></TextView>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"></Switch>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/merchant"
+                android:layout_marginTop="10dp"
+                android:background="#CDCBCB"></TextView>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_signup_login"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="#414BB2"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textSize="20sp"></Button>
+
+    </LinearLayout>
+
+</ScrollView>

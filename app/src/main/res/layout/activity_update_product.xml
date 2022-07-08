@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_8sdp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/images"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBaseline_toTopOf="parent"
+        app:layout_constraintDimensionRatio="H, 2:2"
+        app:riv_corner_radius="@dimen/_8sdp"
+        tools:layout_editor_absoluteX="-75dp"
+        tools:layout_editor_absoluteY="-2dp"
+        android:src="@drawable/ic_add_photo_alternate_24" />
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:hint="title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_25ssp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/images"
+        tools:layout_editor_absoluteX="15dp" />
+
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15sdp"
+        android:hint="price"
+        android:textColor="@color/red"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:layout_editor_absoluteX="15dp" />
+
+    <RelativeLayout
+        android:id="@+id/layout_evaluate"
+        android:layout_margin="@dimen/_15sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:progressTint="@color/yellows" />
+
+        <EditText
+            android:id="@+id/percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:hint="@string/giam" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/layout_evaluate"
+        android:hint="description"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintBottom_toTopOf="@+id/btn_update"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="#808080"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/update"
+        android:textColor="@color/White"
+        android:textSize="20sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

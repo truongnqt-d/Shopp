@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.ProductFragment"
+    android:theme="@android:style/Theme.Holo.Light" >
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        style="@style/margin"
+        android:id="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu"/>
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_toLeftOf="@+id/cart"
+            app:defaultQueryHint="@string/search" />
+
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cart_24"
+            android:layout_alignParentEnd="true"/>
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
+        android:layout_below="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/find_your_style"
+                android:textSize="@dimen/_25ssp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:textStyle="bold"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/view_pager"
+                android:paddingStart="80dp"
+                android:paddingEnd="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/circle_indicator"
+                android:layout_marginTop="@dimen/_2sdp"
+                app:ci_drawable="@drawable/bg_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center_horizontal"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
