@@ -41,17 +41,17 @@ import customview.DateInputMask;
 public class UpdateInformation extends AppCompatActivity {
 
     private StorageReference storageRef;
-    private FirebaseStorage storage;
     private StorageTask uploadTask;
 
     private ProgressBar progressBar;
     private Button btnUpdate;
     private ImageView imgPerson, imgBack;
-    private EditText edt_name, edt_birth_date, edt_gender;
+    private EditText edt_name;
+    private EditText edt_birth_date;
+    private EditText edt_gender;
 
     private FirebaseFirestore dataUser;
     private String idEmail;
-    private String no_update_img;
 
     private Uri imageUri;
 
@@ -82,7 +82,6 @@ public class UpdateInformation extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
 
         storageRef = FirebaseStorage.getInstance().getReference("user");
-        storage = FirebaseStorage.getInstance();
         dataUser = FirebaseFirestore.getInstance();
     }
 
@@ -126,19 +125,10 @@ public class UpdateInformation extends AppCompatActivity {
     }
 
     private void showUserInformation() {
-        Bundle bundle = getIntent().getExtras();
-        Users users = (Users) bundle.get("put_information_user");
-        if(users == null) {
-            return;
-        }
-        Glide.with(UpdateInformation.this).load(users.getImagePerson()).error(R.drawable.ic_baseline_child_care_24).into(imgPerson);
-        no_update_img = users.getImagePerson();
-        edt_name.setText(users.getFullName());
-        edt_birth_date.setText(users.getAge());
-        edt_gender.setText(users.getGenDer());
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        idEmail = user.getUid();
+        Glide.with(UpdateInformation.this).load(Constant.user.getImagePerson()).error(R.drawable.ic_baseline_child_care_24).into(imgPerson);
+        edt_name.setText(Constant.user.getName());
+        edt_birth_date.setText(String.valueOf(Constant.user.getAge()));
+        edt_gender.setText(Constant.user.getGenDer());
     }
 
     private void openFileChooser() {
@@ -155,6 +145,7 @@ public class UpdateInformation extends AppCompatActivity {
     }
 
     private void upDateUser() {
+        idEmail = FirebaseAuth.getInstance().getUid();
         if (imageUri != null) {
             StorageReference fileReference = storageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(imageUri));
@@ -180,7 +171,7 @@ public class UpdateInformation extends AppCompatActivity {
                                     dataUser.collection("users").document(idEmail)
                                             .update(
                                                     "age", edt_birth_date.getText().toString().trim(),
-                                                    "fullName", edt_name.getText().toString().trim(),
+                                                    "name", edt_name.getText().toString().trim(),
                                                     "genDer", edt_gender.getText().toString().trim(),
                                                     "imagePerson", imageUrl
                                             ).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -218,7 +209,7 @@ public class UpdateInformation extends AppCompatActivity {
             dataUser.collection("users").document(idEmail)
                     .update(
                             "age", edt_birth_date.getText().toString().trim(),
-                            "fullName", edt_name.getText().toString().trim(),
+                            "name", edt_name.getText().toString().trim(),
                             "genDer", edt_gender.getText().toString().trim()
                     ).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

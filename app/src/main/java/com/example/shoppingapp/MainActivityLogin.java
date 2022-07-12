@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shoppingapp.Sqlite.UserDbHelper;
 import com.example.shoppingapp.dataFirebase.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,8 +30,7 @@ public class MainActivityLogin extends AppCompatActivity {
     private EditText edtPassWord;
     private ProgressDialog progressDialog;
     private FirebaseAuth authCheckLogin;
-    private FirebaseUser user;
-    private Users userData;
+    private FirebaseUser firebaseUser;
 
     private static final String TAG = "MainActivityLogin";
 
@@ -46,6 +44,7 @@ public class MainActivityLogin extends AppCompatActivity {
     }
 
     private void initUi() {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
         edtEmail = findViewById(R.id.edt_email);
@@ -101,9 +100,8 @@ public class MainActivityLogin extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            user = FirebaseAuth.getInstance().getCurrentUser();
                             getUser();
+                            // Sign in success, update UI with the signed-in user's information
                             Intent intent = new Intent(MainActivityLogin.this, ProductActivity.class);
                             startActivity(intent);
                             finishAffinity();
@@ -117,7 +115,10 @@ public class MainActivityLogin extends AppCompatActivity {
     }
 
     private void getUser() {
-        DocumentReference getUserPerSon = FirebaseFirestore.getInstance().document("users/" + user.getUid());
+        if(firebaseUser == null){
+            return;
+        }
+        DocumentReference getUserPerSon = FirebaseFirestore.getInstance().document("users/" + firebaseUser.getUid());
         getUserPerSon.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -125,7 +126,7 @@ public class MainActivityLogin extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "get success: ");
-                        userData = task.getResult().toObject(Users.class);
+                        Constant.user = task.getResult().toObject(Users.class);;
                     } else {
                         Log.d(TAG, "No such document");
                     }

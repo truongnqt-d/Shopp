@@ -9,43 +9,44 @@ public class Users implements Serializable {
     @Exclude
     private boolean isAdmin;
     @Exclude
-    private int id;
-    private String fullName;
-    private String age;
+    private String userUid;
+    private String name;
+    private int age;
     private String genDer;
     private String imagePerson;
 
     public Users() {}
 
-    public Users(boolean isAdmin, String fullName, String age, String genDer, String imagePerson) {
+    public Users(boolean isAdmin, String name, int age, String genDer, String imagePerson) {
         this.isAdmin = isAdmin;
-        this.fullName = fullName;
+        this.name = name;
         this.age = age;
         this.genDer = genDer;
         this.imagePerson = imagePerson;
     }
 
-    public Users(int id, String fullName, String age, String genDer, String imagePerson) {
-        this.id = id;
-        this.fullName = fullName;
+    public Users(String id, boolean isAdmin, String name, int age, String genDer, String imagePerson) {
+        this.userUid = id;
+        this.isAdmin = isAdmin;
+        this.name = name;
         this.age = age;
         this.genDer = genDer;
         this.imagePerson = imagePerson;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -77,19 +78,19 @@ public class Users implements Serializable {
         return isAdmin;
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return userUid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String id) {
+        this.userUid = id;
     }
 
     @Override
     public String toString() {
         return "Users{" +
                 "isAdmin=" + isAdmin +
-                ", fullName='" + fullName + '\'' +
+                ", fullName='" + name + '\'' +
                 ", age='" + age + '\'' +
                 ", genDer='" + genDer + '\'' +
                 ", imagePerson='" + imagePerson + '\'' +

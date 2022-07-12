@@ -94,9 +94,7 @@ public class CartProductActivity extends AppCompatActivity {
             .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    for(QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots){
-                        listProduct.add(queryDocumentSnapshot.toObject(ProductAddCart.class));
-                    }
+                    for(QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots){                                                                }
                     if(listProduct.size() > 0) {
                         productAdapter.addData(listProduct);
                     }

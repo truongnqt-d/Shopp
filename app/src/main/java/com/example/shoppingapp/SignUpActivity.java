@@ -1,10 +1,13 @@
 package com.example.shoppingapp;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,7 +35,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
-    private EditText edtEmail, edtPassWord;
+    private EditText edtEmail;
+    private EditText edtPassWord;
     private Button btnSignup_Login;
     private ProgressDialog progressDialog;
     private FirebaseFirestore dbSignUp = FirebaseFirestore.getInstance();
@@ -99,11 +106,13 @@ public class SignUpActivity extends AppCompatActivity {
                             String date = df.format(Calendar.getInstance().getTime());
                             Map<String, Object> user = new HashMap<>();
                             user.put("email", email);
-                            user.put("fullName", "user01");
-                            user.put("age", "18");
+                            user.put("name", "user01");
+                            user.put("age", 18);
                             user.put("genDer", "Male");
                             user.put("isAdmin", false);
                             user.put("dayCreate", date);
+                            user.put("userUid", userUid.getUid());
+                            user.put("imagePerson", "R.drawable.ic_baseline_child_care_24");
 
                             dbSignUp.document("users/" + userUid.getUid())
                                     .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
