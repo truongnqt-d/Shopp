@@ -99,7 +99,7 @@ public class DbHelper extends SQLiteOpenHelper {
         if(cursor != null)
             cursor.moveToFirst();
         // String id, boolean isAdmin, String name, int age, String genDer, String imagePerson
-        Users user = new Users(cursor.getString(0), Boolean.parseBoolean(cursor.getString(1)), cursor.getString(2), cursor.getInt(3), cursor.getString(4), cursor.getString(5));
+        Users user = new Users(cursor.getString(0), Boolean.parseBoolean(cursor.getString(1)), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
         db.close();
         return user;
     }

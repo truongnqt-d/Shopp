@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,18 +15,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.shoppingapp.AddToCartActivity;
+import com.example.shoppingapp.ProductDetails;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 
 import java.util.List;
 
-public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.ProductSaleViewHolder> {
+public class AdvertActivity extends RecyclerView.Adapter<AdvertActivity.AdvertViewHolder> {
     private List<Production> listProduct;
     private Context context;
 
     @SuppressLint("NotifyDataSetChanged")
-    public ProductSaleAdapter(Context context, List<Production> productions) {
+    public AdvertActivity(Context context, List<Production> productions) {
         this.listProduct = productions;
         this.context = context;
         notifyDataSetChanged();
@@ -41,19 +40,19 @@ public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.
 
     @NonNull
     @Override
-    public ProductSaleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdvertViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vpg_product_sale, parent, false);
 
-        return new ProductSaleViewHolder(view);
+        return new AdvertViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductSaleViewHolder holder, int position) {
-        ((ProductSaleAdapter.ProductSaleViewHolder) holder).setProductDetails(listProduct.get(position));
+    public void onBindViewHolder(@NonNull AdvertViewHolder holder, int position) {
+        ((AdvertViewHolder) holder).setProductDetails(listProduct.get(position));
     }
 
 
-    private void setValue(ProductSaleViewHolder holder, Production production) {
+    private void setValue(AdvertViewHolder holder, Production production) {
         Glide.with(context).load(production.getImgProduct()).into(holder.img);
         holder.description.setText(production.getDescription());
         String rating = production.getRating() == null ? "3" : production.getRating().trim();
@@ -71,13 +70,13 @@ public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.
         context = null;
     }
 
-    public class ProductSaleViewHolder extends RecyclerView.ViewHolder {
+    public class AdvertViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout layoutItem;
         private ImageView img;
         private TextView title;
         private TextView description;
 
-        public ProductSaleViewHolder(@NonNull View itemView) {
+        public AdvertViewHolder(@NonNull View itemView) {
             super(itemView);
 
             layoutItem = itemView.findViewById(R.id.layout_item);
@@ -99,7 +98,7 @@ public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.
             });
         }
         private void onClickGoToDetails(Production production) {
-            Intent intent = new Intent(context, AddToCartActivity.class);
+            Intent intent = new Intent(context, ProductDetails.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("object_product", production);
 //            bundle.putParcelable("object_product", production);

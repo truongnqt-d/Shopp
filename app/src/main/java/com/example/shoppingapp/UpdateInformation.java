@@ -2,10 +2,12 @@ package com.example.shoppingapp;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -42,18 +44,17 @@ public class UpdateInformation extends AppCompatActivity {
 
     private StorageReference storageRef;
     private StorageTask uploadTask;
-
     private ProgressBar progressBar;
     private Button btnUpdate;
-    private ImageView imgPerson, imgBack;
+    private ImageView imgPerson;
+    private ImageView imgBack;
     private EditText edt_name;
     private EditText edt_birth_date;
     private EditText edt_gender;
-
     private FirebaseFirestore dataUser;
     private String idEmail;
-
     private Uri imageUri;
+    private DateInputMask dateInputMask;
 
     private static final String TAG = "EditInformation";
     ActivityResultLauncher<Intent> activityResultLauncher;
@@ -74,10 +75,9 @@ public class UpdateInformation extends AppCompatActivity {
         edt_gender = findViewById(R.id.edt_gender);
         btnUpdate = findViewById(R.id.btn_upload);
         imgBack = findViewById(R.id.back);
-
-        edt_birth_date.setInputType(InputType.TYPE_CLASS_DATETIME |
-                InputType.TYPE_DATETIME_VARIATION_NORMAL);
-        DateInputMask dateInputMask = new DateInputMask(edt_birth_date);
+//        edt_birth_date.setInputType(InputType.TYPE_CLASS_DATETIME |
+//                InputType.TYPE_DATETIME_VARIATION_NORMAL);
+        dateInputMask = new DateInputMask(edt_birth_date);
 
         progressBar = findViewById(R.id.progress_bar);
 
@@ -111,8 +111,13 @@ public class UpdateInformation extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                upDateUser();
-
+                if(TextUtils.isEmpty(edt_name.getText()) || TextUtils.isEmpty(edt_birth_date.getText())
+                    || TextUtils.isEmpty(edt_gender.getText())) {
+                    Toast.makeText(UpdateInformation.this, "fields cannot be left blank", Toast.LENGTH_SHORT).show();
+                } else if (edt_birth_date.getInputType() == (InputType.TYPE_CLASS_DATETIME |
+                        InputType.TYPE_DATETIME_VARIATION_NORMAL)){
+                    upDateUser();
+                }
             }
         });
 
@@ -125,10 +130,15 @@ public class UpdateInformation extends AppCompatActivity {
     }
 
     private void showUserInformation() {
-        Glide.with(UpdateInformation.this).load(Constant.user.getImagePerson()).error(R.drawable.ic_baseline_child_care_24).into(imgPerson);
-        edt_name.setText(Constant.user.getName());
-        edt_birth_date.setText(String.valueOf(Constant.user.getAge()));
-        edt_gender.setText(Constant.user.getGenDer());
+        Bundle bundle = getIntent().getExtras();
+        if(bundle == null){
+            return;
+        }
+        Users user = (Users) bundle.getSerializable("userData");
+        Glide.with(UpdateInformation.this).load(user.getImagePerson()).error(R.drawable.ic_baseline_child_care_24).into(imgPerson);
+        edt_name.setText(user.getName());
+        edt_birth_date.setText(String.valueOf(user.getAge()));
+        edt_gender.setText(user.getGenDer());
     }
 
     private void openFileChooser() {
@@ -207,22 +217,22 @@ public class UpdateInformation extends AppCompatActivity {
         } else {
             Log.d(TAG, "No update img: ");
             dataUser.collection("users").document(idEmail)
-                    .update(
-                            "age", edt_birth_date.getText().toString().trim(),
-                            "name", edt_name.getText().toString().trim(),
-                            "genDer", edt_gender.getText().toString().trim()
-                    ).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(UpdateInformation.this, "Update success", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(UpdateInformation.this, "Update failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
+                .update(
+                        "age", edt_birth_date.getText().toString().trim(),
+                        "name", edt_name.getText().toString().trim(),
+                        "genDer", edt_gender.getText().toString().trim()
+                ).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(UpdateInformation.this, "Update success", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(UpdateInformation.this, "Update failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
     }
 
 }

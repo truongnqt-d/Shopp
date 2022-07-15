@@ -11,6 +11,5 @@ import java.util.List;
 public class Constant {
     public static List cart = new ArrayList<Production>();
     public static List buy = new ArrayList<Production>();
-    public static List<Bitmap> bitmapList;
-    public static Users user;
+//    public static Users user;
 }

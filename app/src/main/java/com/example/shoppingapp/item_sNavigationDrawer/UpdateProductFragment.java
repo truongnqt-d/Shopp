@@ -116,7 +116,8 @@ public class UpdateProductFragment extends Fragment {
     public class ProductionsViewHolder extends RecyclerView.ViewHolder{
         private final ConstraintLayout layout_item;
         private final ImageView img;
-        private final TextView tvTitle, tvPrice, tvDescription;
+        private final TextView tvTitle;
+        private final TextView tvPrice;
         private final RatingBar ratingBar;
 
         public ProductionsViewHolder(@NonNull View itemView) {
@@ -125,7 +126,6 @@ public class UpdateProductFragment extends Fragment {
             img = itemView.findViewById(R.id.images);
             tvTitle = itemView.findViewById(R.id.title);
             tvPrice = itemView.findViewById(R.id.price);
-            tvDescription = itemView.findViewById((R.id.description));
             ratingBar = itemView.findViewById(R.id.ratingBar);
         }
 
@@ -133,7 +133,6 @@ public class UpdateProductFragment extends Fragment {
             Glide.with(getContext()).load(production.getImgProduct()).into(img);
             tvTitle.setText(production.getTitle());
             tvPrice.setText(production.getPrice());
-            tvDescription.setText(production.getDescription());
             String rating = production.getRating() == null ? "3.5" : production.getRating().trim();
             ratingBar.setRating(Float.parseFloat(rating));
 

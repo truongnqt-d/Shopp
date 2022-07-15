@@ -16,7 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.shoppingapp.AddToCartActivity;
+import com.example.shoppingapp.ProductDetails;
 import com.example.shoppingapp.R;
 
 import java.util.List;
@@ -120,7 +120,7 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             });
         }
         private void onClickGoToDetails(Production production) {
-            Intent intent = new Intent(mContext, AddToCartActivity.class);
+            Intent intent = new Intent(mContext, ProductDetails.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("object_product", production);
 //            bundle.putParcelable("object_product", production);
@@ -167,7 +167,7 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             });
         }
         private void onClickGoToDetails(Production production) {
-            Intent intent = new Intent(mContext, AddToCartActivity.class);
+            Intent intent = new Intent(mContext, ProductDetails.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("object_product", production);
 //            bundle.putParcelable("object_product", production);

@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.shoppingapp.dataFirebase.Users;
+
 public class MyViewPage2Adapter extends FragmentStateAdapter {
-    public MyViewPage2Adapter(@NonNull FragmentActivity fragmentActivity) {
+    private Users user;
+    public MyViewPage2Adapter(@NonNull FragmentActivity fragmentActivity, Users users) {
         super(fragmentActivity);
+        this.user = users;
     }
 
     @NonNull
@@ -24,7 +28,7 @@ public class MyViewPage2Adapter extends FragmentStateAdapter {
                 return new ChatHistoryFragment();
 
             case 3:
-                return new ProfileFragment();
+                return ProfileFragment.newInstance(user);
 
             default:
                 return new ProductFragment();

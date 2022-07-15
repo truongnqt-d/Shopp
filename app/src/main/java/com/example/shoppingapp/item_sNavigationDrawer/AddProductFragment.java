@@ -30,7 +30,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.dataFirebase.Product;
-import com.example.shoppingapp.dataFirebase.ProductSale;
+import com.example.shoppingapp.dataFirebase.Advert;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,7 +52,8 @@ import com.google.firebase.storage.UploadTask;
 public class AddProductFragment extends Fragment {
 
     private static final String TAG = "AddProductFragment";
-    private EditText txtTitle, txtPrice, txtPercent, txtDescription;
+    private EditText txtTitle;
+    private EditText txtPrice;
     private RatingBar ratingBar;
     private Button btn_upload;
     private ImageView imgProduct;
@@ -63,7 +64,7 @@ public class AddProductFragment extends Fragment {
     private FirebaseFirestore dataProduct;
     private StorageTask uploadTask;
     private Object obj;
-    private ProductSale productSale;
+    private Advert advert;
     private Product product;
 
     private String productType;
@@ -96,8 +97,6 @@ public class AddProductFragment extends Fragment {
 
         txtTitle = getView().findViewById(R.id.title);
         txtPrice = getView().findViewById(R.id.price);
-        txtPercent = getView().findViewById(R.id.percent);
-        txtDescription = getView().findViewById(R.id.description);
         ratingBar = getView().findViewById(R.id.ratingBar);
         imgProduct = getView().findViewById(R.id.images);
         btn_upload = getView().findViewById(R.id.btn_upload);
@@ -172,18 +171,16 @@ public class AddProductFragment extends Fragment {
                                 public void onSuccess(Uri uri) {
                                     String imageUrl = uri.toString();
                                     String id = String.valueOf(System.currentTimeMillis());
-                                    if (txtPercent.getText().toString().length() <= 0) {
+                                    if (txtPrice.getText().toString().length() > 0) {
                                         productType = "products";
                                         product = new Product(id, imageUrl, txtTitle.getText().toString().trim(),
-                                                txtDescription.getText().toString().trim(), txtPrice.getText().toString().trim(),
+                                                txtPrice.getText().toString().trim(),
                                                 String.valueOf(ratingBar.getRating()));
                                         obj = product;
                                     } else {
-                                        productType = "productSales";
-                                        productSale = new ProductSale(id, imageUrl, txtTitle.getText().toString().trim(),
-                                                txtDescription.getText().toString().trim(), txtPrice.getText().toString().trim(),
-                                                String.valueOf(ratingBar.getRating()), txtPercent.getText().toString().trim());
-                                        obj = productSale;
+                                        productType = "advert";
+                                        advert = new Advert(id, imageUrl, txtTitle.getText().toString().trim());
+                                        obj = advert;
                                     }
                                     dataProduct.collection(productType)
                                             .add(obj).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

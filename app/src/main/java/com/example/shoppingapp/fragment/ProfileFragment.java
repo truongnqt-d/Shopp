@@ -2,6 +2,7 @@ package com.example.shoppingapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.shoppingapp.Constant;
 import com.example.shoppingapp.MyProductionList;
 import com.example.shoppingapp.UpdateInformation;
 import com.example.shoppingapp.MainActivityLogin;
@@ -23,6 +23,7 @@ import com.example.shoppingapp.ProductActivity;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.credit.AddCredit;
 import com.example.shoppingapp.credit.CreditActivity;
+import com.example.shoppingapp.dataFirebase.Users;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -41,10 +42,12 @@ public class ProfileFragment extends Fragment {
     private TextView txt_name;
     private LinearLayout layout_add_credit;
     private LinearLayout layout_credit;
+    private Users user;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_USER = "users";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
@@ -55,20 +58,11 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructo
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductFragment.
-     */
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
+    public static ProfileFragment newInstance(Users users) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_USER, users);
         fragment.setArguments(args);
         return fragment;
     }
@@ -98,6 +92,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initUi() {
+        Log.d(TAG, "initUi: ");
         product = (ProductActivity) getActivity();
         layout_my_product = getView().findViewById(R.id.layout_my_product);
         layout_credit = getView().findViewById(R.id.layout_credit);
@@ -109,7 +104,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initListener() {
-        getUsers();
+        user = (Users) getArguments().getSerializable(ARG_USER);
+        showUsers();
 
         txtLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +118,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(product, UpdateInformation.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("userData", user);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -143,8 +142,8 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void getUsers() {
-        if(Constant.user.getIsAdmin() == false){
+    private void showUsers() {
+        if(user.getIsAdmin() == false){
             layout_my_product.setVisibility(View.GONE);
         } else {
             layout_my_product.setOnClickListener(new View.OnClickListener() {
@@ -156,8 +155,8 @@ public class ProfileFragment extends Fragment {
             });
         }
 
-        Glide.with(product).load(Constant.user.getImagePerson()).error(R.drawable.ic_baseline_child_care_24).into(imagePerson);
-        txt_name.setText(Constant.user.getName());
+        Glide.with(product).load(user.getImagePerson()).error(R.drawable.ic_baseline_child_care_24).into(imagePerson);
+        txt_name.setText(user.getName());
     }
 
     private void logOut() {

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shoppingapp.dataFirebase.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,9 @@ public class MainActivityLogin extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseAuth authCheckLogin;
     private FirebaseUser firebaseUser;
+    private Users user;
+    private Bundle bundleUser;
+    private Intent intent;
 
     private static final String TAG = "MainActivityLogin";
 
@@ -44,7 +48,6 @@ public class MainActivityLogin extends AppCompatActivity {
     }
 
     private void initUi() {
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
         edtEmail = findViewById(R.id.edt_email);
@@ -98,13 +101,12 @@ public class MainActivityLogin extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            getUser();
-                            // Sign in success, update UI with the signed-in user's information
-                            Intent intent = new Intent(MainActivityLogin.this, ProductActivity.class);
-                            startActivity(intent);
-                            finishAffinity();
+                            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if(firebaseUser != null) {
+                                getUser();
+                                progressDialog.dismiss();
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivityLogin.this, "Incorrect email or password",
@@ -115,23 +117,47 @@ public class MainActivityLogin extends AppCompatActivity {
     }
 
     private void getUser() {
-        if(firebaseUser == null){
-            return;
-        }
         DocumentReference getUserPerSon = FirebaseFirestore.getInstance().document("users/" + firebaseUser.getUid());
-        getUserPerSon.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//        getUserPerSon.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (document.exists()) {
+//                        Log.d(TAG, "get success: ");
+//                        user = task.getResult().toObject(Users.class);
+//                        bundleUser = new Bundle();
+//                        intent = new Intent(MainActivityLogin.this, ProductActivity.class);
+//                        bundleUser.putSerializable("userLogin", user);
+//
+//                        // Sign in success, update UI with the signed-in user's information
+//                        intent.putExtras(bundleUser);
+//                        startActivity(intent);
+//                        finishAffinity();
+////                        Constant.user = task.getResult().toObject(Users.class);
+//                    } else {
+//                        Log.d(TAG, "No such document");
+//                    }
+//                } else {
+//                    Log.d(TAG, "get failed with ", task.getException());
+//                }
+//            }
+//        });
+
+        getUserPerSon.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "get success: ");
-                        Constant.user = task.getResult().toObject(Users.class);;
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    Log.d(TAG, "get success: ");
+                    user = documentSnapshot.toObject(Users.class);
+                    bundleUser = new Bundle();
+                    intent = new Intent(MainActivityLogin.this, ProductActivity.class);
+                    bundleUser.putSerializable("userLogin", user);
+
+                    // Sign in success, update UI with the signed-in user's information
+                    intent.putExtras(bundleUser);
+                    startActivity(intent);
+                    finishAffinity();
                 }
             }
         });

@@ -25,7 +25,7 @@ import com.example.shoppingapp.ProductActivity;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 import com.example.shoppingapp.sub_fragment_adapter.ProductionsAdapter;
-import com.example.shoppingapp.view_pager.ProductSaleAdapter;
+import com.example.shoppingapp.view_pager.AdvertActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +51,7 @@ public class ProductFragment extends Fragment {
     private View view;
     private ProductActivity productActivity;
     private ProductionsAdapter productionsAdapter;
-    private ProductSaleAdapter productSaleAdapter;
+    private AdvertActivity advertActivity;
     private ProgressDialog progressDialog;
     private ViewPager2 viewPager2;
     private CircleIndicator3 circleIndicator3;
@@ -164,9 +164,9 @@ public class ProductFragment extends Fragment {
     private void setListProductViewPager2() {
         setUpMoviesViewPager2();
 
-        productionList = getListProductSaleFirebase();
-        productSaleAdapter = new ProductSaleAdapter(productActivity, getListProductSaleFirebase());
-        viewPager2.setAdapter(productSaleAdapter);
+        productionList = getListAdvertFirebase();
+        advertActivity = new AdvertActivity(productActivity, getListAdvertFirebase());
+        viewPager2.setAdapter(advertActivity);
         circleIndicator3.setViewPager(viewPager2);
 
 //        viewPager2.setPageTransformer(new DepthPageTransformer());
@@ -194,29 +194,29 @@ public class ProductFragment extends Fragment {
 
     }
 
-    private List<Production> getListProductSaleFirebase() {
-        List<Production> listProductSale = new ArrayList<>();
+    private List<Production> getListAdvertFirebase() {
+        List<Production> listAdvert = new ArrayList<>();
 
 //        progressDialog.show();
-        FirebaseFirestore getProductSales = FirebaseFirestore.getInstance();
-        getProductSales.collection("productSales")
+        FirebaseFirestore getAdvert = FirebaseFirestore.getInstance();
+        getAdvert.collection("advert")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
                     for (QueryDocumentSnapshot queryDocumentSnapshot1 : task.getResult()){
-                        listProductSale.add(queryDocumentSnapshot1.toObject(Production.class));
+                        listAdvert.add(queryDocumentSnapshot1.toObject(Production.class));
                     }
-                if (listProductSale.size() > 0) {
-                    productSaleAdapter.addData(listProductSale);
+                if (listAdvert.size() > 0) {
+                    advertActivity.addData(listAdvert);
                     circleIndicator3.getAdapterDataObserver().onChanged();
-                    productionList = listProductSale;
+                    productionList = listAdvert;
                     Log.d(TAG, "isSuccessful");
                 }
                 }
             }
         });
-        return listProductSale;
+        return listAdvert;
     }
 
     private void getListProductFirebase() {
@@ -260,8 +260,8 @@ public class ProductFragment extends Fragment {
             productionsAdapter.release();
         }
 
-        if(productSaleAdapter != null) {
-            productSaleAdapter.release();
+        if(advertActivity != null) {
+            advertActivity.release();
         }
     }
 

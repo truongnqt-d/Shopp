@@ -30,7 +30,10 @@
             android:textSize="@dimen/_25ssp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/images"
-            tools:layout_editor_absoluteX="15dp" />
+            tools:layout_editor_absoluteX="15dp"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"/>
 
         <EditText
             android:id="@+id/price"
@@ -41,7 +44,10 @@
             android:textColor="@color/red"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintTop_toBottomOf="@id/title"
-            tools:layout_editor_absoluteX="15dp" />
+            tools:layout_editor_absoluteX="15dp"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"/>
 
         <RelativeLayout
             android:id="@+id/layout_evaluate"
@@ -61,31 +67,14 @@
                 android:numStars="5"
                 android:progressTint="@color/yellows" />
 
-            <EditText
-                android:id="@+id/percent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:hint="@string/giam" />
         </RelativeLayout>
-
-        <EditText
-            android:id="@+id/description"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
-            app:layout_constraintTop_toBottomOf="@id/layout_evaluate"
-            android:hint="description"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/layout_evaluate"
         app:layout_constraintBottom_toTopOf="@+id/btn_upload"
         android:layout_marginBottom="16dp" />
 

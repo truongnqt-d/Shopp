@@ -9,7 +9,7 @@
     android:focusable="true"
     app:cardCornerRadius="8dp"
     app:cardElevation="3dp"
-    tools:context=".AddToCartActivity">
+    tools:context=".ProductDetails">
     <ScrollView
         android:id="@+id/layout_product_info"
         app:layout_constraintTop_toTopOf="parent"

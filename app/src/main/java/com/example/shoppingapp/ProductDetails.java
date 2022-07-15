@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.dataFirebase.ProductAddCart;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
-import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,8 +30,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class AddToCartActivity extends AppCompatActivity {
+public class ProductDetails extends AppCompatActivity {
     private Production product;
+    private ProductAddCart productionData;
     private ImageView imgProduct;
 
     private TextView txtTitle, txtPrice, txtEvaluate, txtDescription, txtBuy;
@@ -42,16 +41,16 @@ public class AddToCartActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private ProductAddCart productAddCart;
     private FirebaseUser idEmail;
-    private int quantity;
+    private int quantityData;
     private String idDocumentProduct;
-
+    private boolean flag;
 
     private static final String TAG = "AddToCartActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_to_cart);
+        setContentView(R.layout.activity_product_details);
         initUi();
         initListener();
     }
@@ -87,7 +86,7 @@ public class AddToCartActivity extends AppCompatActivity {
         txtBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AddToCartActivity.this, OrderActivity.class));
+                startActivity(new Intent(ProductDetails.this, OrderActivity.class));
             }
         });
     }
@@ -95,48 +94,44 @@ public class AddToCartActivity extends AppCompatActivity {
     private void getDataProductFirestore() {
         firebaseFirestore.collection("cart").whereEqualTo("id", product.getId())
             .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            idDocumentProduct = document.getId();
-                            quantity = Integer.parseInt(String.valueOf(document.get("quantity")));
-                            updateQuantityProductCart();
-                            Log.d(TAG, "onSuccess: true" + product.getId() + " == " + document.get("id"));
-                        }
-                    } else {
-                        addProductCart();
-                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        productionData = task.getResult().toObjects(ProductAddCart.class);
+                        if(product.get)
+                        productionData = (ProductAddCart)task.getResult().toObjects(ProductAddCart.class);
                     }
-                }
-            });
-
+                });
+        if(productionData == null) {
+            addProductCart();
+        } else {
+            quantityData = productionData.getQuantity();
+            updateQuantityProductCart(quantityData);
+        }
     }
 
     private void addProductCart() {
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
         String date = df.format(Calendar.getInstance().getTime());
 
-
         productAddCart = new ProductAddCart(product.getId(), product.getTitle(), product.getPrice(),
-                product.getDescription(), product.getImgProduct(), product.getRating(), date,
-                idEmail.getUid(), 1);
+            product.getDescription(), product.getImgProduct(), product.getRating(), date,
+            idEmail.getUid(), 1);
 
         firebaseFirestore.collection("cart").add(productAddCart)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "onSuccess: ");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, "onFailure: ");
-                    }
-                });
+            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    Log.d(TAG, "onSuccess: ");
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "onFailure: ");
+                }
+            });
     }
 
-    private void updateQuantityProductCart() {
+    private void updateQuantityProductCart(int quantity) {
         firebaseFirestore.collection("cart").document(idDocumentProduct)
                 .update("quantity", ++ quantity)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

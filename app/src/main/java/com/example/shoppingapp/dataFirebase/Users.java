@@ -11,13 +11,13 @@ public class Users implements Serializable {
     @Exclude
     private String userUid;
     private String name;
-    private int age;
+    private String age;
     private String genDer;
     private String imagePerson;
 
     public Users() {}
 
-    public Users(boolean isAdmin, String name, int age, String genDer, String imagePerson) {
+    public Users(boolean isAdmin, String name, String age, String genDer, String imagePerson) {
         this.isAdmin = isAdmin;
         this.name = name;
         this.age = age;
@@ -25,7 +25,7 @@ public class Users implements Serializable {
         this.imagePerson = imagePerson;
     }
 
-    public Users(String id, boolean isAdmin, String name, int age, String genDer, String imagePerson) {
+    public Users(String id, boolean isAdmin, String name, String age, String genDer, String imagePerson) {
         this.userUid = id;
         this.isAdmin = isAdmin;
         this.name = name;
@@ -42,11 +42,11 @@ public class Users implements Serializable {
         this.name = name;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

@@ -36,7 +36,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
-            android:hint="@string/you_email" />
+            android:hint="@string/you_email"
+            android:maxLines="1"
+            android:inputType="text"/>
 
         <TextView
             android:layout_marginBottom="5dp"
@@ -52,7 +54,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
-            android:hint="@string/you_password"></EditText>
+            android:hint="@string/you_password"
+            android:maxLines="1"
+            android:inputType="textPassword"></EditText>
 
         <RelativeLayout
             android:layout_marginBottom="5dp"

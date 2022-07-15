@@ -1,26 +1,21 @@
 package com.example.shoppingapp.dataFirebase;
 
-
 import java.io.Serializable;
 
-public class Product implements Serializable {
+public class Advert implements Serializable {
     //    Serializable
 //    private String percent;
     private String id;
     private String title;
-    private String price;
     private String imgProduct;
-    private String rating;
 
-    public Product() {
+    public Advert() {
     }
 
-    public Product(String id, String imgProduct, String title, String price, String rating) {
+    public Advert(String id, String imgProduct, String title) {
         this.id = id;
         this.title = title;
-        this.price = price;
         this.imgProduct = imgProduct;
-        this.rating = rating;
     }
 
     public String getId() {
@@ -39,14 +34,6 @@ public class Product implements Serializable {
         this.title = title;
     }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
     public String getImgProduct() {
         return imgProduct;
     }
@@ -54,12 +41,5 @@ public class Product implements Serializable {
     public void setImgProduct(String imgProduct) {
         this.imgProduct = imgProduct;
     }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
 }
+

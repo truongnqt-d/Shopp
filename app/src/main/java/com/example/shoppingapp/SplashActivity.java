@@ -20,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class SplashActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private static final String TAG = "SplashActivity";
+    private Bundle bundleUser;
+    private Users users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,6 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivityLogin.class));
         } else {
             getUser();
-            startActivity(new Intent(this, ProductActivity.class));
         }
         finish();
     }
@@ -56,7 +57,15 @@ public class SplashActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "get success: ");
-                        Constant.user = task.getResult().toObject(Users.class);
+                        users = task.getResult().toObject(Users.class);
+                        bundleUser = new Bundle();
+                        Intent intent = new Intent(SplashActivity.this, ProductActivity.class);
+                        bundleUser.putSerializable("userSplash", users);
+
+                        // Sign in success, update UI with the signed-in user's information
+                        intent.putExtras(bundleUser);
+                        startActivity(intent);
+//                        Constant.user = task.getResult().toObject(Users.class);
                     } else {
                         Log.d(TAG, "No such document");
                     }

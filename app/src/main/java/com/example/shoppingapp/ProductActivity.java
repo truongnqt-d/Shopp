@@ -1,5 +1,6 @@
 package com.example.shoppingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -10,15 +11,9 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.shoppingapp.dataFirebase.Users;
 import com.example.shoppingapp.fragment.MyViewPage2Adapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.shoppingapp.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProductActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -32,6 +27,7 @@ public class ProductActivity extends AppCompatActivity {
     private int itemId;
     private int itemId_call;
     private Bundle bundleUser;
+    private Users users;
 
     private static final String TAG = "ProductActivity";
 
@@ -48,13 +44,12 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void initUi() {
-
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.getMenu().findItem(R.id.navigation_title).setChecked(true);
 
         mViewPager2 = findViewById(R.id.view_pager2);
         mViewPager2.setUserInputEnabled(false);
-        mMyViewPage2Adapter = new MyViewPage2Adapter(this);
+        mMyViewPage2Adapter = new MyViewPage2Adapter(this, getUser());
         mViewPager2.setAdapter(mMyViewPage2Adapter);
     }
 
@@ -107,27 +102,35 @@ public class ProductActivity extends AppCompatActivity {
 
     private void itemCall() {
 
-        switch (itemId_call){
-            case 0:
-                CurrentFragment = FRAGMENT_PRODUCT;
-                bottomNavigationView.getMenu().findItem(R.id.navigation_title).setChecked(true);
-                break;
-
-            case 1:
-                CurrentFragment = FRAGMENT_NOTIFICATION;
-                bottomNavigationView.getMenu().findItem(R.id.navigation_notification).setChecked(true);
-                break;
-
-            case 2:
-                CurrentFragment = FRAGMENT_CHAT;
-                bottomNavigationView.getMenu().findItem(R.id.navigation_chat_history).setChecked(true);
-                break;
-
-            case 3:
-                CurrentFragment = FRAGMENT_PROFILE;
-                bottomNavigationView.getMenu().findItem(R.id.navigation_profile).setChecked(true);
-                break;
-        }
+//        switch (itemId_call){
+//            case 0:
+//                CurrentFragment = FRAGMENT_PRODUCT;
+//                bottomNavigationView.getMenu().findItem(R.id.navigation_title).setChecked(true);
+//                break;
+//
+//            case 1:
+//                CurrentFragment = FRAGMENT_NOTIFICATION;
+//                bottomNavigationView.getMenu().findItem(R.id.navigation_notification).setChecked(true);
+//                break;
+//
+//            case 2:
+//                CurrentFragment = FRAGMENT_CHAT;
+//                bottomNavigationView.getMenu().findItem(R.id.navigation_chat_history).setChecked(true);
+//                break;
+//
+//            case 3:
+//                CurrentFragment = FRAGMENT_PROFILE;
+//                bottomNavigationView.getMenu().findItem(R.id.navigation_profile).setChecked(true);
+//                break;
+//        }
     }
 
+    private Users getUser(){
+        bundleUser = getIntent().getExtras();
+        users = (Users) bundleUser.get("userLogin");
+        if(users == null){
+            users = (Users) bundleUser.get("userSplash");
+        }
+        return users;
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.shoppingapp.dataFirebase;
 
+import java.io.Serializable;
+
 public class ProductAddCart {
     private String id;
     private String title;

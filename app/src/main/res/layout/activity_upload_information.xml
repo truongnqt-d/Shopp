@@ -148,6 +148,7 @@
         android:hint="@string/birth_date"
         android:textSize="@dimen/_15ssp"
         android:textColor="@color/black"
+        android:inputType="datetime"
         android:textStyle="bold"
         android:lines="1"/>
 
