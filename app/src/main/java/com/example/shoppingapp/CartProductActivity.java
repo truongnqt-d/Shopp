@@ -9,28 +9,22 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.shoppingapp.dataFirebase.ProductAddCart;
+import com.example.shoppingapp.Interface.IclickItem;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 import com.example.shoppingapp.sub_recycleView.ProductAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 public class CartProductActivity extends AppCompatActivity {
@@ -61,6 +55,9 @@ public class CartProductActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
+
         productAdapter = new ProductAdapter(showCartProduct(), this);
         recyclerView.setAdapter(productAdapter);
 
@@ -86,17 +83,23 @@ public class CartProductActivity extends AppCompatActivity {
 
     }
 
-    private List<ProductAddCart> showCartProduct() {
-        List<ProductAddCart> listProduct = new ArrayList<>();
+    private List<Production> showCartProduct() {
+        List<Production> listProduct = new ArrayList<>();
 
         FirebaseUser userId = FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore.collection("cart").whereEqualTo("idUser", userId.getUid())
             .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    for(QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots){                                                                }
+                    Production production;
+                    for(QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots){
+                        production = queryDocumentSnapshot.toObject(Production.class);
+                        production.setDocument(queryDocumentSnapshot.getId());
+                        listProduct.add(production);
+                    }
                     if(listProduct.size() > 0) {
                         productAdapter.addData(listProduct);
+                        Log.d(TAG, "onSuccess: " + listProduct);
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -112,10 +115,6 @@ public class CartProductActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         if(productAdapter != null){
-            productAdapter.release();
-        }
-
-        if(productAdapter != null) {
             productAdapter.release();
         }
     }

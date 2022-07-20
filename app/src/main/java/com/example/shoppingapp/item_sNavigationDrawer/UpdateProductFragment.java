@@ -22,7 +22,6 @@ import com.bumptech.glide.Glide;
 import com.example.shoppingapp.MyProductionList;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.UpdateProductActivity;
-import com.example.shoppingapp.dataFirebase.Product;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -79,10 +78,10 @@ public class UpdateProductFragment extends Fragment {
                 .collection("productSale");
 
 
-        FirestoreRecyclerOptions<Product> getProduct = new FirestoreRecyclerOptions.Builder<Product>()
-                .setQuery(query, Product.class).build();
+        FirestoreRecyclerOptions<Production> getProduct = new FirestoreRecyclerOptions.Builder<Production>()
+                .setQuery(query, Production.class).build();
 
-        adapter = new FirestoreRecyclerAdapter<Product, ProductionsViewHolder>(getProduct) {
+        adapter = new FirestoreRecyclerAdapter<Production, ProductionsViewHolder>(getProduct) {
 
             @NonNull
             @Override
@@ -93,7 +92,7 @@ public class UpdateProductFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull ProductionsViewHolder holder, int position, @NonNull Product model) {
+            protected void onBindViewHolder(@NonNull ProductionsViewHolder holder, int position, @NonNull Production model) {
                 ((ProductionsViewHolder) holder).bind(model);
                 Log.d(TAG, "onBindViewHolder: " + position);
             }
@@ -129,7 +128,7 @@ public class UpdateProductFragment extends Fragment {
             ratingBar = itemView.findViewById(R.id.ratingBar);
         }
 
-        public void bind (Product production) {
+        public void bind (Production production) {
             Glide.with(getContext()).load(production.getImgProduct()).into(img);
             tvTitle.setText(production.getTitle());
             tvPrice.setText(production.getPrice());
@@ -143,7 +142,7 @@ public class UpdateProductFragment extends Fragment {
                 }
             });
         }
-        private void onClickGoToDetails(Product production) {
+        private void onClickGoToDetails(Production production) {
             Intent intent = new Intent(getContext(), UpdateProductActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("object_product", production);
@@ -157,8 +156,6 @@ public class UpdateProductFragment extends Fragment {
         private ConstraintLayout layoutItem;
         private ImageView img;
         private TextView title;
-        private TextView percent;
-        private TextView description;
         private TextView price;
         private RatingBar ratingBar;
 
@@ -168,8 +165,6 @@ public class UpdateProductFragment extends Fragment {
             layoutItem = itemView.findViewById(R.id.layout_item);
             img = itemView.findViewById(R.id.images);
             title = itemView.findViewById(R.id.title);
-            percent = itemView.findViewById(R.id.percent);
-            description = itemView.findViewById(R.id.description);
             price = itemView.findViewById(R.id.price);
             ratingBar = itemView.findViewById(R.id.ratingBar);
         }
@@ -177,8 +172,6 @@ public class UpdateProductFragment extends Fragment {
         public void bind (Production production) {
             Glide.with(getContext()).load(production.getImgProduct()).into(img);
             title.setText(production.getTitle());
-            percent.setText(production.getPercent());
-            description.setText(production.getDescription());
             price.setText(production.getPrice());
             String rating = production.getRating() == null ? "3.5" : production.getRating().trim();
             ratingBar.setRating(Float.parseFloat(rating));

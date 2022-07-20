@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoppingapp.MyProductionList;
 import com.example.shoppingapp.R;
-import com.example.shoppingapp.item_sNavigationDrawer.sub_update_delete.ProductionAdapter_Delete;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
-import com.example.shoppingapp.sub_fragment_adapter.ProductionsAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +34,6 @@ public class DeleteProductFragment extends Fragment {
     private RecyclerView rcvData;
     private String idEmail;
     private MyProductionList myProductionList;
-    private ProductionAdapter_Delete productionsAdapter;
 
     public DeleteProductFragment() {
         // Required empty public constructor
@@ -73,9 +70,6 @@ public class DeleteProductFragment extends Fragment {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
             rcvData.setLayoutManager(gridLayoutManager);
 
-            productionsAdapter = new ProductionAdapter_Delete(getActivity(), getListProduct());
-
-            rcvData.setAdapter(productionsAdapter);
         }
     }
 
@@ -93,7 +87,6 @@ public class DeleteProductFragment extends Fragment {
                             }
                         }
                         if(listDataFirebase.size() > 0) {
-                            productionsAdapter.addData(listDataFirebase);
                         }
                     }
                 });
@@ -108,7 +101,6 @@ public class DeleteProductFragment extends Fragment {
                             }
                         }
                         if(listDataFirebase.size() > 0) {
-                            productionsAdapter.addData(listDataFirebase);
                         }
                     }
                 });

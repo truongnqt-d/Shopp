@@ -23,6 +23,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.shoppingapp.CartProductActivity;
 import com.example.shoppingapp.ProductActivity;
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.SearchItemProduct;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 import com.example.shoppingapp.sub_fragment_adapter.ProductionsAdapter;
 import com.example.shoppingapp.view_pager.AdvertActivity;
@@ -48,7 +49,6 @@ public class ProductFragment extends Fragment {
 
     private static final String TAG = "ProductFragment";
     private RecyclerView rcvData;
-    private View view;
     private ProductActivity productActivity;
     private ProductionsAdapter productionsAdapter;
     private AdvertActivity advertActivity;
@@ -57,6 +57,7 @@ public class ProductFragment extends Fragment {
     private CircleIndicator3 circleIndicator3;
     private List<Production> productionList = new ArrayList<>();
     private ImageView imgCart;
+    private ImageView imgSearchView;
 
     private ConstraintLayout layoutItem;
     private Production production;
@@ -115,14 +116,13 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_product, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_product, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initUi();
+        initUi(view);
         initListener();
     }
 
@@ -138,13 +138,14 @@ public class ProductFragment extends Fragment {
         handler.postDelayed(runnable, 5000);
     }
 
-    private void initUi() {
+    private void initUi(View view) {
         progressDialog = new ProgressDialog(getContext());
         productActivity = (ProductActivity) getActivity();
 
-        viewPager2 = getView().findViewById(R.id.view_pager);
-        circleIndicator3 = getView().findViewById(R.id.circle_indicator);
-        imgCart = getView().findViewById(R.id.cart);
+        viewPager2 = view.findViewById(R.id.view_pager);
+        circleIndicator3 = view.findViewById(R.id.circle_indicator);
+        imgCart = view.findViewById(R.id.cart);
+        imgSearchView = view.findViewById(R.id.imgSearchView);
 
         rcvData = view.findViewById(R.id.rcv_data);
     }
@@ -157,6 +158,13 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), CartProductActivity.class));
+            }
+        });
+
+        imgSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchItemProduct.class));
             }
         });
     }

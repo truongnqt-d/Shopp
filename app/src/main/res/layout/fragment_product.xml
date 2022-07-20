@@ -25,14 +25,14 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_menu"/>
 
-        <androidx.appcompat.widget.SearchView
+        <ImageView
+            android:id="@+id/imgSearchView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_toLeftOf="@+id/cart"
-            app:defaultQueryHint="@string/search" />
+            android:src="@drawable/ic_baseline_search_24"/>
 
         <ImageView
             android:id="@+id/cart"

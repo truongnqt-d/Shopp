@@ -116,25 +116,13 @@
                 app:layout_constraintTop_toBottomOf="@id/layout_evaluate"
                 android:text="Product info"/>
 
-
-            <TextView
-                android:id="@+id/description"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintTop_toBottomOf="@id/product_info"
-                android:text="Điện thoại màu xanh, camera 4 mắt giá rẻ không bán lẻ"/>
-
             <TextView
                 android:id="@+id/line1"
                 android:layout_margin="@dimen/_15sdp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@+id/description"/>
+                app:layout_constraintTop_toBottomOf="@+id/product_info"/>
 
             <RelativeLayout
                 android:id="@+id/layout_product_details"
@@ -250,6 +238,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:onClick="onClickAddToCart"
         android:background="@drawable/bgr_layout_item_add_to_cart"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -295,13 +284,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add_cart_24"/>
+
             <TextView
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_10ssp"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/them_vao_gio_hang"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp" />
 
         </LinearLayout>
         <TextView
@@ -314,5 +304,12 @@
             android:layout_height="match_parent"
             android:text="@string/mua_ngay"/>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameContent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:orientation="horizontal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,8 +33,6 @@ public class UpdateProductActivity extends AppCompatActivity {
         imgProduct = findViewById(R.id.images);
         edtTitle = findViewById(R.id.title);
         edtPrice = findViewById(R.id.price);
-        edtPercent = findViewById(R.id.percent);
-        edtDescription = findViewById(R.id.description);
         ratingBar = findViewById(R.id.ratingBar);
     }
 
@@ -53,10 +51,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         edtTitle.setText(product.getTitle());
         edtPrice.setText(product.getPrice());
         String rating = product.getRating() == null ? "3.5" : product.getRating().trim();
-        edtDescription.setText(product.getDescription());
         ratingBar.setRating(Float.parseFloat(rating));
-
-        edtPercent.setText(product.getPercent());
 
         getData = FirebaseFirestore.getInstance();
         if(edtPercent.getText().toString().trim().length() <= 0) {

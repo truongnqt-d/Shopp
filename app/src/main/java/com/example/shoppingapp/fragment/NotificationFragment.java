@@ -86,10 +86,10 @@ public class NotificationFragment extends Fragment {
 
     private List<Production> getList() {
         List<Production> productionList = new ArrayList<>();
-        productionList.add(new Production("Title", "Description", "Description"));
-        productionList.add(new Production("Title", "Description", "Description"));
-        productionList.add(new Production("Title", "Description", "Description"));
-        productionList.add(new Production("Title", "Description", "Description"));
+//        productionList.add(new Production("Title", "Description", "Description"));
+//        productionList.add(new Production("Title", "Description", "Description"));
+//        productionList.add(new Production("Title", "Description", "Description"));
+//        productionList.add(new Production("Title", "Description", "Description"));
         return productionList;
     }
 }

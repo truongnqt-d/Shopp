@@ -54,7 +54,6 @@ public class AdvertActivity extends RecyclerView.Adapter<AdvertActivity.AdvertVi
 
     private void setValue(AdvertViewHolder holder, Production production) {
         Glide.with(context).load(production.getImgProduct()).into(holder.img);
-        holder.description.setText(production.getDescription());
         String rating = production.getRating() == null ? "3" : production.getRating().trim();
     }
 
@@ -74,7 +73,6 @@ public class AdvertActivity extends RecyclerView.Adapter<AdvertActivity.AdvertVi
         private ConstraintLayout layoutItem;
         private ImageView img;
         private TextView title;
-        private TextView description;
 
         public AdvertViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,13 +80,11 @@ public class AdvertActivity extends RecyclerView.Adapter<AdvertActivity.AdvertVi
             layoutItem = itemView.findViewById(R.id.layout_item);
             img = itemView.findViewById(R.id.images);
             title = itemView.findViewById(R.id.title);
-            description = itemView.findViewById(R.id.description);
         }
 
         public void setProductDetails(Production production) {
             Glide.with(context).load(production.getImgProduct()).into(img);
             title.setText(production.getTitle());
-            description.setText(production.getDescription());
 
             layoutItem.setOnClickListener(new View.OnClickListener() {
                 @Override

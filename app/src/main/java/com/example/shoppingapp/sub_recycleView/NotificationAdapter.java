@@ -39,7 +39,6 @@ public class NotificationAdapter extends RecyclerView.Adapter <NotificationAdapt
 
         holder.txtTitle.setText(production.getTitle());
         holder.txtDescription1.setText(production.getPrice());
-        holder.txtDescription2.setText(production.getDescription());
     }
 
     @Override

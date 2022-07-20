@@ -29,14 +29,13 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
-import com.example.shoppingapp.dataFirebase.Product;
 import com.example.shoppingapp.dataFirebase.Advert;
+import com.example.shoppingapp.sub_fragment_adapter.Production;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -44,6 +43,10 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 /**
@@ -57,7 +60,7 @@ public class AddProductFragment extends Fragment {
     private RatingBar ratingBar;
     private Button btn_upload;
     private ImageView imgProduct;
-    private String idEmail;
+    private String idUser;
     private StorageReference storageRef;
     private ProgressBar progressBar;
     private Uri imageUri;
@@ -65,7 +68,7 @@ public class AddProductFragment extends Fragment {
     private StorageTask uploadTask;
     private Object obj;
     private Advert advert;
-    private Product product;
+    private Production product;
 
     private String productType;
 
@@ -100,6 +103,7 @@ public class AddProductFragment extends Fragment {
         ratingBar = getView().findViewById(R.id.ratingBar);
         imgProduct = getView().findViewById(R.id.images);
         btn_upload = getView().findViewById(R.id.btn_upload);
+        idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     private void initListener() {
@@ -132,7 +136,6 @@ public class AddProductFragment extends Fragment {
             }
         });
 
-        getUserInformationFirebase();
     }
 
     private void openFileChooser() {
@@ -172,10 +175,12 @@ public class AddProductFragment extends Fragment {
                                     String imageUrl = uri.toString();
                                     String id = String.valueOf(System.currentTimeMillis());
                                     if (txtPrice.getText().toString().length() > 0) {
+                                        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+                                        String date = df.format(Calendar.getInstance().getTime());
                                         productType = "products";
-                                        product = new Product(id, imageUrl, txtTitle.getText().toString().trim(),
-                                                txtPrice.getText().toString().trim(),
-                                                String.valueOf(ratingBar.getRating()));
+
+                                        product = new Production(id, idUser, date, 10, txtTitle.getText().toString().trim(),
+                                                txtPrice.getText().toString().trim(), imageUrl, String.valueOf(ratingBar.getRating()));
                                         obj = product;
                                     } else {
                                         productType = "advert";
@@ -213,13 +218,6 @@ public class AddProductFragment extends Fragment {
                     });
         } else {
             Toast.makeText(getActivity(), "No file selected", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void getUserInformationFirebase() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            idEmail = user.getUid();
         }
     }
 

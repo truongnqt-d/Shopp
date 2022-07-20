@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingApp">
         <activity
+            android:name=".SearchItemProduct"
+            android:exported="false" />
+        <activity
             android:name=".credit.CreditActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
@@ -50,16 +53,16 @@
         <activity
             android:name=".CartProductActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ProductDetails"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ProductActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"
-            android:configChanges="orientation|screenSize"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false"

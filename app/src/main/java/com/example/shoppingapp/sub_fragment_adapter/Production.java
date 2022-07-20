@@ -1,66 +1,52 @@
 package com.example.shoppingapp.sub_fragment_adapter;
 
-import android.graphics.Bitmap;
-import android.os.Parcel;
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.io.Serializable;
-
+@IgnoreExtraProperties
 public class Production implements Serializable {
 //    Serializable
-//    private String percent;
-    private String id;
+    @Exclude
+    private String document;
+    @Exclude
     private boolean itemViewType;
-    private int resourceId;
-    private Bitmap bitmap;
+    @Exclude
+    private String id;
+    @Exclude
+    private String idUser;
+    @Exclude
+    private String extraDay;
+
+    private int quantity;
     private String title;
     private String price;
-    private String description;
     private String imgProduct;
     private String rating;
-    private String percent;
 
     public Production() {
     }
 
-    public Production(String imgProduct, String title, String description, String price, String rating, String percent) {
+    public Production(String id, String imgProduct, String title, String price, String rating) {
+        this.id = id;
         this.title = title;
         this.price = price;
-        this.description = description;
         this.imgProduct = imgProduct;
         this.rating = rating;
-        this.percent = percent;
     }
 
-    public Production(int resourceId) {
-        this.resourceId = resourceId;
-    }
-
-    public Production(Bitmap bitmap, String title, String price) {
-        this.bitmap = bitmap;
+    public Production(String id, String idUser, String extraDay, int quantity, String title, String price, String imgProduct, String rating) {
+        this.id = id;
+        this.idUser = idUser;
+        this.extraDay = extraDay;
+        this.quantity = quantity;
         this.title = title;
         this.price = price;
+        this.imgProduct = imgProduct;
+        this.rating = rating;
     }
 
-    public Production(String title, String price, String description) {
-        this.title = title;
-        this.price = price;
-        this.description = description;
-    }
-
-    public Production(int resourceId, String title, String price, String description) {
-        this.resourceId = resourceId;
-        this.title = title;
-        this.price = price;
-        this.description = description;
-    }
-
-    protected Production(Parcel in) {
-        resourceId = in.readInt();
-        bitmap = in.readParcelable(Bitmap.class.getClassLoader());
-        title = in.readString();
-        price = in.readString();
-    }
-
+    @Exclude
     public boolean getItemViewType() {
         return itemViewType;
     }
@@ -69,20 +55,36 @@ public class Production implements Serializable {
         this.itemViewType = itemViewType;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public String getId() {
+        return id;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public int getResourceId() {
-        return resourceId;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getExtraDay() {
+        return extraDay;
+    }
+
+    public void setExtraDay(String extraDay) {
+        this.extraDay = extraDay;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getTitle() {
@@ -101,14 +103,6 @@ public class Production implements Serializable {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getImgProduct() {
         return imgProduct;
     }
@@ -125,20 +119,15 @@ public class Production implements Serializable {
         this.rating = rating;
     }
 
-    public String getPercent() {
-        return percent;
+    public String getDocument() {
+        return document;
     }
 
-    public void setPercent(String percent) {
-        this.percent = percent;
+    public void setDocument(String document) {
+        this.document = document;
     }
 
-    public String getId() {
-        return id;
+    public boolean isItemViewType() {
+        return itemViewType;
     }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
 }

@@ -25,7 +25,7 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private List<Production> listProductions;
     private Context mContext;
     private static int TYPE_VIEW_PRODUCT = 1;
-    private static int TYPE_VIEW_PRODUCT_SALE = 2;
+    private static int TYPE_VIEW_ADVERT = 2;
 
         @SuppressLint("NotifyDataSetChanged")
     public ProductionsAdapter(Context context, List<Production> list) {
@@ -46,7 +46,7 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if(TYPE_VIEW_PRODUCT == viewType){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rcv_product, parent, false);
             return new ProductionsViewHolder(view);
-        } else if(TYPE_VIEW_PRODUCT_SALE == viewType){
+        } else if(TYPE_VIEW_ADVERT == viewType){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rcv_product_sale, parent, false);
             return new ProductSaleViewHolder(view);
         }
@@ -61,7 +61,7 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
         if(TYPE_VIEW_PRODUCT == holder.getItemViewType()) {
             ((ProductionsViewHolder) holder).setProductDetails(listProductions.get(position));
-        } else if(TYPE_VIEW_PRODUCT_SALE == holder.getItemViewType()) {
+        } else if(TYPE_VIEW_ADVERT == holder.getItemViewType()) {
             ((ProductSaleViewHolder) holder).setProductDetails(listProductions.get(position));
         }
     }
@@ -69,10 +69,10 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemViewType(int position) {
         Production production = listProductions.get(position);
-        if(production.getItemViewType() == false && production.getPercent() == null) {
-            return TYPE_VIEW_PRODUCT;
+        if(production.getItemViewType() == false && production.getPrice() == null) {
+            return TYPE_VIEW_ADVERT;
         } else {
-            return TYPE_VIEW_PRODUCT_SALE;
+            return TYPE_VIEW_PRODUCT;
         }
     }
 
@@ -91,7 +91,7 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public class ProductionsViewHolder extends RecyclerView.ViewHolder{
         private final ConstraintLayout layout_item;
         private final ImageView img;
-        private final TextView tvTitle, tvPrice, tvDescription;
+        private final TextView tvTitle, tvPrice;
         private final RatingBar ratingBar;
 
         public ProductionsViewHolder(@NonNull View itemView) {
@@ -100,7 +100,6 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             img = itemView.findViewById(R.id.images);
             tvTitle = itemView.findViewById(R.id.title);
             tvPrice = itemView.findViewById(R.id.price);
-            tvDescription = itemView.findViewById((R.id.description));
             ratingBar = itemView.findViewById(R.id.ratingBar);
         }
 
@@ -108,7 +107,6 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             Glide.with(mContext).load(production.getImgProduct()).into(img);
             tvTitle.setText(production.getTitle());
             tvPrice.setText(production.getPrice());
-            tvDescription.setText(production.getDescription());
             String rating = production.getRating() == null ? "3.5" : production.getRating().trim();
             ratingBar.setRating(Float.parseFloat(rating));
 
@@ -133,8 +131,6 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         private ConstraintLayout layoutItem;
         private ImageView img;
         private TextView title;
-        private TextView percent;
-        private TextView description;
         private TextView price;
         private RatingBar ratingBar;
 
@@ -144,8 +140,6 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             layoutItem = itemView.findViewById(R.id.layout_item);
             img = itemView.findViewById(R.id.images);
             title = itemView.findViewById(R.id.title);
-            percent = itemView.findViewById(R.id.percent);
-            description = itemView.findViewById(R.id.description);
             price = itemView.findViewById(R.id.price);
             ratingBar = itemView.findViewById(R.id.ratingBar);
         }
@@ -153,8 +147,6 @@ public class ProductionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public void setProductDetails(Production production) {
             Glide.with(mContext).load(production.getImgProduct()).into(img);
             title.setText(production.getTitle());
-            percent.setText(production.getPercent());
-            description.setText(production.getDescription());
             price.setText(production.getPrice());
             String rating = production.getRating() == null ? "3.5" : production.getRating().trim();
             ratingBar.setRating(Float.parseFloat(rating));

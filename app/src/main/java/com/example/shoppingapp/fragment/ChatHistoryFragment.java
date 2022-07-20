@@ -75,7 +75,7 @@ public class ChatHistoryFragment extends Fragment {
         RecyclerView rcv = view.findViewById(R.id.recycler_view);
         rcv.setLayoutManager(layoutManager);
 
-        ChatHistoryAdapter chatHistoryAdapter = new ChatHistoryAdapter(getList());
+        ChatHistoryAdapter chatHistoryAdapter = new ChatHistoryAdapter(getList(), getActivity());
         rcv.setAdapter(chatHistoryAdapter);
 
         return view;
@@ -83,11 +83,11 @@ public class ChatHistoryFragment extends Fragment {
 
     private List<Production> getList() {
         List<Production> productionList = new ArrayList<>();
-        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
-        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
-        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
-        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
-        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
+//        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
+//        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
+//        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
+//        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
+//        productionList.add(new Production(R.drawable.ic_person, "Name", "message", "time"));
         return productionList;
     }
 }

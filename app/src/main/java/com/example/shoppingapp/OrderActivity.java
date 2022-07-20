@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shoppingapp.Interface.IclickItem;
 import com.example.shoppingapp.sub_recycleView.ProductAdapter;
 
 public class OrderActivity extends AppCompatActivity {

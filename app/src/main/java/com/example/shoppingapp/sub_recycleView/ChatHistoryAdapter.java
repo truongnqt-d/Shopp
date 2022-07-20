@@ -1,5 +1,6 @@
 package com.example.shoppingapp.sub_recycleView;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 
@@ -16,9 +18,11 @@ import java.util.List;
 
 public class ChatHistoryAdapter extends RecyclerView.Adapter <ChatHistoryAdapter.ViewHolDel> {
     private List<Production> listProduct;
+    private Context context;
 
-    public ChatHistoryAdapter(List<Production> listProduct) {
+    public ChatHistoryAdapter(List<Production> listProduct, Context context) {
         this.listProduct = listProduct;
+        this.context = context;
         notifyDataSetChanged();
     }
 
@@ -36,10 +40,9 @@ public class ChatHistoryAdapter extends RecyclerView.Adapter <ChatHistoryAdapter
             return;
         }
 
-        holder.imageView.setImageResource(production.getResourceId());
+        Glide.with(context).load(production.getImgProduct()).into(holder.imageView);
         holder.txtName.setText(production.getTitle());
         holder.txtTime.setText(production.getPrice());
-        holder.txtMessage.setText(production.getDescription());
     }
 
     @Override
