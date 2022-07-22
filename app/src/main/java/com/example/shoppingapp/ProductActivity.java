@@ -19,20 +19,17 @@ public class ProductActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private ViewPager2 mViewPager2;
     private MyViewPage2Adapter mMyViewPage2Adapter;
-
-    private static int FRAGMENT_PRODUCT = 1;
-    private static int FRAGMENT_NOTIFICATION = 2;
-    private static int FRAGMENT_CHAT = 3;
-    private static int FRAGMENT_PROFILE = 4;
     private int itemId;
     private int itemId_call;
     private Bundle bundleUser;
     private Users users;
 
-    private static final String TAG = "ProductActivity";
-
-
+    private static int FRAGMENT_PRODUCT = 1;
+    private static int FRAGMENT_NOTIFICATION = 2;
+    private static int FRAGMENT_CHAT = 3;
+    private static int FRAGMENT_PROFILE = 4;
     private static int CurrentFragment = FRAGMENT_PRODUCT;
+    private static final String TAG = "ProductActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

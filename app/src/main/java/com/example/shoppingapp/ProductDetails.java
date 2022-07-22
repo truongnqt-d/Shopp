@@ -2,36 +2,16 @@ package com.example.shoppingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.fragment.AddProductCart;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
-import com.google.android.gms.tasks.OnCanceledListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class ProductDetails extends AppCompatActivity {
     private Production product;
@@ -77,13 +57,9 @@ public class ProductDetails extends AppCompatActivity {
     }
 
     public void onClickAddToCart(View view){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         AddProductCart fragment = new AddProductCart().newInstance(product);
-        transaction.add(R.id.frameContent, fragment);
-        transaction.addToBackStack("add_to_cart");
-        transaction.commit();
+        fragment.show(getSupportFragmentManager(), "TAG");
     }
 
     private void getProduct() {

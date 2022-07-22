@@ -5,7 +5,7 @@
     android:layout_height="@dimen/_300sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.AddProductCart"
-    android:background="@color/white_D8">
+    android:background="@color/white">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -20,11 +20,11 @@
     <TextView
         android:id="@+id/txtTitle"
         android:text="@string/title"
-        android:layout_marginTop="@dimen/_75sdp"
+        android:layout_marginTop="@dimen/_60sdp"
         android:layout_marginLeft="@dimen/_20sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/imgProduct"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_20ssp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -35,9 +35,10 @@
         android:layout_marginLeft="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"
         app:layout_constraintLeft_toRightOf="@+id/imgProduct"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_15ssp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"/>
 
     <ImageView
         android:id="@+id/imgClear"
@@ -56,7 +57,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/imgProduct"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_15ssp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -99,7 +100,7 @@
 
     <Button
         android:id="@+id/btnAdd"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:text="@string/addToCart"
         app:layout_constraintTop_toBottomOf="@+id/txt_text"
         android:layout_marginTop="@dimen/_20sdp"
@@ -107,5 +108,8 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60sdp"
-        android:textSize="@dimen/_15sdp"/>
+        android:textSize="@dimen/_15sdp"
+        android:backgroundTint="@color/green_39"
+        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/_10sdp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

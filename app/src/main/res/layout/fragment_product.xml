@@ -8,6 +8,7 @@
     android:theme="@android:style/Theme.Holo.Light" >
 
     <!-- TODO: Update blank fragment layout -->
+
     <RelativeLayout
         style="@style/margin"
         android:id="@+id/toolbar_container"
@@ -41,8 +42,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_cart_24"
             android:layout_alignParentEnd="true"/>
-
-
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView

@@ -1,6 +1,5 @@
 package com.example.shoppingapp.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +11,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -23,14 +22,12 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.shoppingapp.CartProductActivity;
 import com.example.shoppingapp.ProductActivity;
 import com.example.shoppingapp.R;
-import com.example.shoppingapp.SearchItemProduct;
+import com.example.shoppingapp.dataFirebase.Advert;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 import com.example.shoppingapp.sub_fragment_adapter.ProductionsAdapter;
-import com.example.shoppingapp.view_pager.AdvertActivity;
+import com.example.shoppingapp.view_pager.AdvertAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -51,21 +48,19 @@ public class ProductFragment extends Fragment {
     private RecyclerView rcvData;
     private ProductActivity productActivity;
     private ProductionsAdapter productionsAdapter;
-    private AdvertActivity advertActivity;
-    private ProgressDialog progressDialog;
+    private AdvertAdapter advertActivity;
     private ViewPager2 viewPager2;
     private CircleIndicator3 circleIndicator3;
-    private List<Production> productionList = new ArrayList<>();
+    private List<Advert> advertArrayList = new ArrayList<>();
+    private List<Production> productionArrayList = new ArrayList<>();
     private ImageView imgCart;
     private ImageView imgSearchView;
 
-    private ConstraintLayout layoutItem;
-    private Production production;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if(viewPager2.getCurrentItem() == productionList.size() - 1) {
+            if(viewPager2.getCurrentItem() == advertArrayList.size() - 1) {
                 viewPager2.setCurrentItem(0);
             } else {
                 viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
@@ -139,7 +134,6 @@ public class ProductFragment extends Fragment {
     }
 
     private void initUi(View view) {
-        progressDialog = new ProgressDialog(getContext());
         productActivity = (ProductActivity) getActivity();
 
         viewPager2 = view.findViewById(R.id.view_pager);
@@ -151,20 +145,20 @@ public class ProductFragment extends Fragment {
     }
 
     private void initListener() {
-        getListProductFirebase();
+        setListProductFirebase();
         setListProductViewPager2();
 
         imgCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CartProductActivity.class));
+                onclickCart();
             }
         });
 
         imgSearchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SearchItemProduct.class));
+                onclickSearch();
             }
         });
     }
@@ -172,8 +166,8 @@ public class ProductFragment extends Fragment {
     private void setListProductViewPager2() {
         setUpMoviesViewPager2();
 
-        productionList = getListAdvertFirebase();
-        advertActivity = new AdvertActivity(productActivity, getListAdvertFirebase());
+        advertArrayList = getListAdvertFirebase();
+        advertActivity = new AdvertAdapter(productActivity, getListAdvertFirebase());
         viewPager2.setAdapter(advertActivity);
         circleIndicator3.setViewPager(viewPager2);
 
@@ -202,8 +196,8 @@ public class ProductFragment extends Fragment {
 
     }
 
-    private List<Production> getListAdvertFirebase() {
-        List<Production> listAdvert = new ArrayList<>();
+    private List<Advert> getListAdvertFirebase() {
+        List<Advert> listAdvert = new ArrayList<>();
 
 //        progressDialog.show();
         FirebaseFirestore getAdvert = FirebaseFirestore.getInstance();
@@ -213,12 +207,12 @@ public class ProductFragment extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
                     for (QueryDocumentSnapshot queryDocumentSnapshot1 : task.getResult()){
-                        listAdvert.add(queryDocumentSnapshot1.toObject(Production.class));
+                        listAdvert.add(queryDocumentSnapshot1.toObject(Advert.class));
                     }
                 if (listAdvert.size() > 0) {
                     advertActivity.addData(listAdvert);
                     circleIndicator3.getAdapterDataObserver().onChanged();
-                    productionList = listAdvert;
+                    advertArrayList = listAdvert;
                     Log.d(TAG, "isSuccessful");
                 }
                 }
@@ -227,15 +221,12 @@ public class ProductFragment extends Fragment {
         return listAdvert;
     }
 
-    private void getListProductFirebase() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-            rcvData.setLayoutManager(staggeredGridLayoutManager);
+    private void setListProductFirebase() {
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rcvData.setLayoutManager(staggeredGridLayoutManager);
 
-            productionsAdapter = new ProductionsAdapter(productActivity, getListProduct());
-            rcvData.setAdapter(productionsAdapter);
-        }
+        productionsAdapter = new ProductionsAdapter(productActivity, getListProduct());
+        rcvData.setAdapter(productionsAdapter);
     }
 
     private List<Production> getListProduct() {
@@ -247,18 +238,30 @@ public class ProductFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if(task.isSuccessful()) {
-                        for (QueryDocumentSnapshot queryDocumentSnapshot1 : task.getResult()){
-                            listProduct.add(queryDocumentSnapshot1.toObject(Production.class));
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                            Production production = documentSnapshot.toObject(Production.class);
+                            production.setDocument(documentSnapshot.getId());
+                            listProduct.add(production);
                         }
                         if (listProduct.size() > 0) {
                             productionsAdapter.addData(listProduct);
+                            productionArrayList = listProduct;
                             Log.d(TAG, "isSuccessful");
                         }
                     }
                 }
             });
-//        progressDialog.show();
         return listProduct;
+    }
+
+    private void onclickCart() {
+        Bundle bundle = new Bundle();
+        startActivity(new Intent(productActivity, CartProductActivity.class));
+    }
+
+    private void onclickSearch() {
+        DialogFragment dialogFragment = new SearchItemProduct().newInstance(productionArrayList);
+        dialogFragment.show(productActivity.getSupportFragmentManager(), "TAG");
     }
 
     @Override

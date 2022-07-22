@@ -18,6 +18,7 @@ import com.example.shoppingapp.R;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +34,7 @@ import java.util.Calendar;
  * Use the {@link AddProductCart#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddProductCart extends Fragment {
+public class AddProductCart extends BottomSheetDialogFragment {
 
     private View view;
     private ImageView imgProduct;
@@ -52,40 +53,16 @@ public class AddProductCart extends Fragment {
     private String idUser;
     private String idDocumentProduct;
     private static final String TAG = "AddProductCart";
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "productions";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public AddProductCart() {
-        // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment AddProductCart.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AddProductCart newInstance(Production production) {
         AddProductCart fragment = new AddProductCart();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, production);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
     }
 
     @Override
@@ -116,7 +93,7 @@ public class AddProductCart extends Fragment {
         imgClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                dismiss();
             }
         });
 

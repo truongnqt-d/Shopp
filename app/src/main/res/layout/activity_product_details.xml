@@ -10,28 +10,30 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="3dp"
     tools:context=".ProductDetails">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/images"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBaseline_toTopOf="parent"
+        app:layout_constraintDimensionRatio="H, 2:2"
+        app:riv_corner_radius="@dimen/_8sdp"
+        tools:layout_editor_absoluteX="-75dp"
+        tools:layout_editor_absoluteY="-2dp"
+        android:src="@drawable/quanao" />
+
     <ScrollView
         android:id="@+id/layout_product_info"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/images"
+        app:layout_constraintBottom_toTopOf="@+id/layoutBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/images"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBaseline_toTopOf="parent"
-                app:layout_constraintDimensionRatio="H, 2:2"
-                app:riv_corner_radius="@dimen/_8sdp"
-                tools:layout_editor_absoluteX="-75dp"
-                tools:layout_editor_absoluteY="-2dp"
-                android:src="@drawable/quanao" />
+            android:layout_height="match_parent" >
 
             <TextView
                 android:id="@+id/title"
@@ -43,7 +45,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_25ssp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/images"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="15dp" />
 
             <TextView
@@ -232,12 +234,11 @@
                 android:layout_height="1dp"
                 android:background="@color/gray"
                 app:layout_constraintTop_toBottomOf="@+id/layout_return"/>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/layoutBottom"
         android:onClick="onClickAddToCart"
         android:background="@drawable/bgr_layout_item_add_to_cart"
         android:orientation="horizontal"
@@ -271,6 +272,7 @@
             android:layout_width="1dp"
             android:layout_height="40dp"
             android:background="@color/black"/>
+
         <LinearLayout
             android:id="@+id/add_to_cart"
             android:layout_gravity="center"
@@ -304,12 +306,4 @@
             android:layout_height="match_parent"
             android:text="@string/mua_ngay"/>
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/frameContent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_300sdp"
-        android:orientation="horizontal" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

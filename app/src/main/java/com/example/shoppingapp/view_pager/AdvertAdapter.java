@@ -17,24 +17,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.ProductDetails;
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.dataFirebase.Advert;
 import com.example.shoppingapp.sub_fragment_adapter.Production;
 
 import java.util.List;
 
-public class AdvertActivity extends RecyclerView.Adapter<AdvertActivity.AdvertViewHolder> {
-    private List<Production> listProduct;
+public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.AdvertViewHolder> {
+    private List<Advert> adverts;
     private Context context;
 
     @SuppressLint("NotifyDataSetChanged")
-    public AdvertActivity(Context context, List<Production> productions) {
-        this.listProduct = productions;
+    public AdvertAdapter(Context context, List<Advert> adverts) {
+        this.adverts = adverts;
         this.context = context;
         notifyDataSetChanged();
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void addData(List<Production> productions) {
-        this.listProduct = productions;
+    public void addData(List<Advert> adverts) {
+        this.adverts = adverts;
         notifyDataSetChanged();
     }
 
@@ -48,7 +49,7 @@ public class AdvertActivity extends RecyclerView.Adapter<AdvertActivity.AdvertVi
 
     @Override
     public void onBindViewHolder(@NonNull AdvertViewHolder holder, int position) {
-        ((AdvertViewHolder) holder).setProductDetails(listProduct.get(position));
+        ((AdvertViewHolder) holder).setProductDetails(adverts.get(position));
     }
 
 
@@ -59,8 +60,8 @@ public class AdvertActivity extends RecyclerView.Adapter<AdvertActivity.AdvertVi
 
     @Override
     public int getItemCount() {
-        if(listProduct != null) {
-            return listProduct.size();
+        if(adverts != null) {
+            return adverts.size();
         }
         return 0;
     }
@@ -82,25 +83,25 @@ public class AdvertActivity extends RecyclerView.Adapter<AdvertActivity.AdvertVi
             title = itemView.findViewById(R.id.title);
         }
 
-        public void setProductDetails(Production production) {
-            Glide.with(context).load(production.getImgProduct()).into(img);
-            title.setText(production.getTitle());
+        public void setProductDetails(Advert advert) {
+            Glide.with(context).load(advert.getImgProduct()).into(img);
+            title.setText(advert.getTitle());
 
-            layoutItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onClickGoToDetails(production);
-                }
-            });
+//            layoutItem.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    onClickGoToDetails(advert);
+//                }
+//            });
         }
-        private void onClickGoToDetails(Production production) {
-            Intent intent = new Intent(context, ProductDetails.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("object_product", production);
-//            bundle.putParcelable("object_product", production);
-            intent.putExtras(bundle);
-            context.startActivity(intent);
-        }
+//        private void onClickGoToDetails(Advert advert) {
+//            Intent intent = new Intent(context, ProductDetails.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("object_product", advert);
+////            bundle.putParcelable("object_product", production);
+//            intent.putExtras(bundle);
+//            context.startActivity(intent);
+//        }
 
     }
 }

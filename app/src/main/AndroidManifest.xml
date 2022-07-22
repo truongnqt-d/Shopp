@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingApp">
         <activity
-            android:name=".SearchItemProduct"
-            android:exported="false" />
-        <activity
             android:name=".credit.CreditActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />

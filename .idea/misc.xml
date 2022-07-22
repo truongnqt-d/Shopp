@@ -142,8 +142,13 @@
         <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/fragment_add_product_cart.xml" value="0.2622798887859129" />
         <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/fragment_product.xml" value="0.2942122186495177" />
         <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/fragment_search_item_product.xml" value="0.3333333333333333" />
         <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/fragment_update_product.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/item_rcv_add_product.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/item_rcv_cart_product.xml" value="0.7182741116751269" />
+        <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/item_rcv_product.xml" value="0.19768563162970107" />
+        <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/item_rcv_product_sale.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/item_rcv_search_product.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/ShopApp/app/src/main/res/layout/vpg_product_sale.xml" value="0.33" />
       </map>
     </option>

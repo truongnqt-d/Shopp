@@ -1,16 +1,17 @@
 package com.example.shoppingapp.sub_fragment_adapter;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.io.Serializable;
 @IgnoreExtraProperties
-public class Production implements Serializable {
+public class Production implements Parcelable, Serializable {
 //    Serializable
     @Exclude
     private String document;
-    @Exclude
-    private boolean itemViewType;
     @Exclude
     private String id;
     @Exclude
@@ -46,14 +47,29 @@ public class Production implements Serializable {
         this.rating = rating;
     }
 
-    @Exclude
-    public boolean getItemViewType() {
-        return itemViewType;
+    protected Production(Parcel in) {
+        document = in.readString();
+        id = in.readString();
+        idUser = in.readString();
+        extraDay = in.readString();
+        quantity = in.readInt();
+        title = in.readString();
+        price = in.readString();
+        imgProduct = in.readString();
+        rating = in.readString();
     }
 
-    public void setItemViewType(boolean itemViewType) {
-        this.itemViewType = itemViewType;
-    }
+    public static final Creator<Production> CREATOR = new Creator<Production>() {
+        @Override
+        public Production createFromParcel(Parcel in) {
+            return new Production(in);
+        }
+
+        @Override
+        public Production[] newArray(int size) {
+            return new Production[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -119,6 +135,7 @@ public class Production implements Serializable {
         this.rating = rating;
     }
 
+    @Exclude
     public String getDocument() {
         return document;
     }
@@ -127,7 +144,21 @@ public class Production implements Serializable {
         this.document = document;
     }
 
-    public boolean isItemViewType() {
-        return itemViewType;
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(document);
+        dest.writeString(id);
+        dest.writeString(idUser);
+        dest.writeString(extraDay);
+        dest.writeInt(quantity);
+        dest.writeString(title);
+        dest.writeString(price);
+        dest.writeString(imgProduct);
+        dest.writeString(rating);
     }
 }
